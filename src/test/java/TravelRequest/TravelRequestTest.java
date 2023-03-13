@@ -108,7 +108,7 @@ public class TravelRequestTest {
         WebElement ticketBooking = driver.findElement(
                 By.xpath("//input[contains(@id, 'crm_business_trip_tasks_1')]"));
         ticketBooking.click();
-        assertTrue(ticketBooking.isSelected(), "Чекбокс [Заказ наличных] не выбран");
+        assertTrue(ticketBooking.isSelected(), "Чекбокс [Заказ билетов] не выбран");
 
         // - Указать города выбытия и прибытия
         String departureCity = "Москва";
