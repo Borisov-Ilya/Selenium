@@ -20,20 +20,17 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement submitBtn;
 
-    @Step("Ожидание появления формы авторизации")
     public LoginPage waitingLoginForm() {
         waitUtilElementToBeVisible(loginForm);
         return this;
     }
 
-    @Step("Ввод логина и пароля")
     public LoginPage enterLoginAndPassword(String login, String password) {
         fillInputField(loginInput, login);
         fillInputField(passwordInput, password);
         return this;
     }
 
-    @Step("Нажимаем кнопку 'Войти'")
     public MainPage clickBtnLogin() {
         waitUtilElementToBeClickable(submitBtn).click();
         return pageManager.getMainPage();

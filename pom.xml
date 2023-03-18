@@ -23,7 +23,10 @@
         <!-- Dependencies version -->
         <selenium-java.version>4.8.1</selenium-java.version>
         <selenium-http-jdk-client.version>4.8.1</selenium-http-jdk-client.version>
-        <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
+        <junit.version>5.9.2</junit.version>
+        <junit-platform-runner.version>1.9.1</junit-platform-runner.version>
+        <cucumber-java.version>5.7.0</cucumber-java.version>
+        <allure-cucumber5-jvm.version>2.15.0</allure-cucumber5-jvm.version>
 
         <!-- Plugin version -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -47,18 +50,47 @@
             <version>${selenium-http-jdk-client.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter-engine.version}</version>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit5 -->
+        <!-- https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine -->
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-runner -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>${junit-platform-runner.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber-java.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber-java.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber-jvm -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit5</artifactId>
-            <version>${allure-junit5.version}</version>
+            <artifactId>allure-cucumber5-jvm</artifactId>
+            <version>${allure-cucumber5-jvm.version}</version>
         </dependency>
     </dependencies>
 
@@ -85,21 +117,17 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <includes>**/*Test.java</includes>
+                    <includes>**/*CucumberRunner.java</includes>
                     <argLine>
                         -Xmx1024m
                         -Dfile.encoding=${encoding.type}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        -Dcucumber.options="--plugin "
+                        -Dcucumber.options="--tags @test "
                     </argLine>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/report/allure-results</allure.results.directory>
                     </systemPropertyVariables>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>ru.appline.framework.utils.MyAllureListener</value>
-                        </property>
-                    </properties>
                 </configuration>
                 <dependencies>
                     <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->

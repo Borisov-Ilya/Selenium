@@ -3,8 +3,7 @@ package ru.appline.framework.managers;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-import static ru.appline.framework.utils.PropConst.IMPLICITLY_WAIT;
-import static ru.appline.framework.utils.PropConst.PAGE_LOAD_TIMEOUT;
+import static ru.appline.framework.utils.PropConst.*;
 
 /**
  * @author Arkadiy_Alaverdyan
@@ -39,6 +38,7 @@ public class InitManager {
                 Duration.ofSeconds(Integer.parseInt(props.getProperty(IMPLICITLY_WAIT))));
         driverManager.getDriver().manage().timeouts().pageLoadTimeout(
                 Duration.ofSeconds(Integer.parseInt(props.getProperty(PAGE_LOAD_TIMEOUT))));
+        driverManager.getDriver().get(props.getProperty(BASE_URL));
     }
 
     /**

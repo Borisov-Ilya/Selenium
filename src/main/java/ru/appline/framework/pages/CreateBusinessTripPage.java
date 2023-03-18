@@ -52,20 +52,17 @@ public class CreateBusinessTripPage extends BasePage {
     @FindBy(xpath = "//span[@class='validation-failed']")
     private WebElement validationFailedMessage;
 
-    @Step("Проверка заголовка на странице создания командировки")
     public CreateBusinessTripPage checkCreateBusinessTripPageTitle() {
         assertEquals("Создать командировку", title.getText(),
                 "Заголовок отсутствует/не соответствует требуемому");
         return this;
     }
 
-    @Step("Нажимаем кнопку выбора подразделения")
     public CreateBusinessTripPage clickSubdivisionBtn() {
         subdivisionBtn.click();
         return this;
     }
 
-    @Step("Выбираем подразделение {nameSubdivision}")
     public CreateBusinessTripPage selectSubdivision(String nameSubdivision) {
         for (WebElement subItem : listSubdivision) {
             if (subItem.getText().trim().equalsIgnoreCase(nameSubdivision)) {
@@ -77,19 +74,16 @@ public class CreateBusinessTripPage extends BasePage {
         return this;
     }
 
-    @Step("Нажимаем кнопку 'Открыть список'")
     public CreateBusinessTripPage clickOpenListBtn() {
         waitUtilElementToBeClickable(openListBtn).click();
         return this;
     }
 
-    @Step("Нажимаем кнопку 'Укажите организацию'")
     public CreateBusinessTripPage clickSelectOrganizationBtn() {
         waitUtilElementToBeClickable(selectOrganizationBtn).click();
         return this;
     }
 
-    @Step("Заполняем поле {nameField}, значением {value}")
     public CreateBusinessTripPage fillField(String nameField, String value) {
         WebElement element = null;
         switch (nameField) {
@@ -122,7 +116,6 @@ public class CreateBusinessTripPage extends BasePage {
         return this;
     }
 
-    @Step("Выбираем организацию из списка")
     public CreateBusinessTripPage selectOrganization(String organization) {
         for (WebElement organizationItem : listOrganizationsSearch) {
             if (organizationItem.getText().trim().equalsIgnoreCase(organization)) {
@@ -134,7 +127,6 @@ public class CreateBusinessTripPage extends BasePage {
         return this;
     }
 
-    @Step("Выбираем задачу {task}")
     public CreateBusinessTripPage selectTask(String task) {
         for (WebElement element : tasksLabel) {
             if (element.getText().trim().equalsIgnoreCase(task)) {
@@ -147,14 +139,12 @@ public class CreateBusinessTripPage extends BasePage {
         return this;
     }
 
-    @Step("Нажимаем кнопку 'Сохранить и выйти'")
     public CreateBusinessTripPage clickSaveAndClose() {
         waitUtilElementToBeClickable(saveAndCloseBtn).click();
         loading();
         return this;
     }
 
-    @Step("Проверяем сообщение об ошибке {message}")
     public CreateBusinessTripPage checkValidationFailedMessage(String message) {
         waitUtilElementToBeVisible(validationFailedMessage);
         assertEquals(message, validationFailedMessage.getText(),
